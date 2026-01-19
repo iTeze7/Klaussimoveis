@@ -273,7 +273,7 @@ function initTouchSwipe() {
 }
 
 function handleSwipe(propertyIndex, startX, endX) {
-  const swipeThreshold = 40; // Minimum distance for swipe
+  const swipeThreshold = 20; // Minimum distance for swipe
   const diff = startX - endX;
   
   if (Math.abs(diff) > swipeThreshold) {
