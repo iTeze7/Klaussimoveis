@@ -862,7 +862,17 @@ img {
 
 @media (max-width: 768px) {
   .carousel-btn {
-    display: none !important;
+    width: 28px;
+    height: 28px;
+    opacity: 0.9;
+  }
+  
+  .carousel-prev {
+    left: 8px;
+  }
+  
+  .carousel-next {
+    right: 8px;
   }
   
   .carousel-dots {
@@ -1412,5 +1422,3 @@ img {
 .dev-credit:hover {
   text-decoration: underline;
 }
-
-
