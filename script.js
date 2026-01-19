@@ -11,7 +11,7 @@ const properties = [
     title: "Sobrado Moderno",
     location: "Vila Nova Carmela",
     features: "03 dormitórios • sendo 01 suíte • 180m²",
-    description: "Olá! Vi este imóvel no anúncio e quero saber valores e condições."
+    description: "Olá! Vi este imóvel no anúncio e quero saber valores e condições. Sobrado Vila Nova Carmela."
   },
   {
     images: [
@@ -30,7 +30,7 @@ const properties = [
     title: "Apartamento",
     location: "Vila Silvia, Condomínio Primavera",
     features: "2 quartos • 40m²",
-    description: "Olá! Vi este apartamento no anúncio e gostaria de saber mais informações."
+    description: "Olá! Vi este apartamento no anúncio e gostaria de saber mais informações. Apartamento Vila Silvia."
   },
   {
     images: [
@@ -50,7 +50,7 @@ const properties = [
     title: "Casa Em Condomínio",
     location: "Próximo ao Cecap, região Vila Barros",
     features: "2 suítes • Acabamento moderno • 73m²",
-    description: "Olá, tenho interesse neste imóvel e gostaria de mais informações."
+    description: "Olá, tenho interesse neste imóvel e gostaria de mais informações. Casa em condomínio próximo ao Cecap."
   },
   {
     images: [
@@ -71,7 +71,7 @@ const properties = [
     title: "Apartamento",
     location: "José Miguel Ackel, Condomínio Seasons Family",
     features: "2 Quartos • 1 Vaga de Garagem • 45m²",
-    description: "Olá! Vi este apartamento no anúncio e gostaria de saber valor, entrada e financiamento."
+    description: "Olá! Vi este apartamento no anúncio e gostaria de saber valor, entrada e financiamento. Apartamento José miguel Ackel."
   },
   {
     images: [
@@ -91,16 +91,22 @@ const properties = [
     title: "Casa à venda",
     location: "Jardim Jovaia | Guarulhos",
     features: " 2 dormitórios • 6 vagas de garagem • 210m²",
-    description: "Olá! Tenho interesse na Casa Moderna em Guarulhos. Gostaria de agendar uma visita para conhecer o imóvel."
+    description: "Olá! Tenho interesse nessa Casa. Gostaria de agendar uma visita para conhecer o imóvel. Casa à venda no Jardim Jovaia em Guarulhos."
   },
   {
     images: [
-      'img/manutenção.png'
+      'img/ap6/ap1.jpeg',
+      'img/ap6/ap2.jpeg',
+      'img/ap6/ap3.jpeg',
+      'img/ap6/ap4.jpeg',
+      'img/ap6/ap5.jpeg',
+      'img/ap6/ap6.jpeg',
+      'img/ap6/ap7.jpeg'
     ],
-    title: "Em Obras",
+    title: "Duplex à venda",
     location: "Guarulhos",
     features: "?",
-    description: "Olá! Tenho interesse na Casa Moderna em Guarulhos. Gostaria de agendar uma visita para conhecer o imóvel."
+    description: "Olá! Vi este Duplex no anúncio e gostaria de saber valor, entrada e financiamento. Duplex à venda em Guarulhos."
   }
 ];
 
@@ -239,22 +245,35 @@ function initTouchSwipe() {
   
   carousels.forEach(carousel => {
     let touchStartX = 0;
-    let touchEndX = 0;
+    let isSwiping = false;
     const propertyIndex = carousel.dataset.index;
     
     carousel.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
+     touchStartX = e.touches[0].clientX;
+      isSwiping = true;
     }, { passive: true });
     
+    carousel.addEventListener('touchmove', (e) => {
+      if (!isSwiping) return;
+      // Prevent default only for horizontal swipes
+      const touchCurrentX = e.touches[0].clientX;
+      const diff = Math.abs(touchStartX - touchCurrentX);
+      if (diff > 10) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+    
     carousel.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
+      if (!isSwiping) return;
+      const touchEndX = e.changedTouches[0].clientX;
       handleSwipe(propertyIndex, touchStartX, touchEndX);
+       isSwiping = false;
     }, { passive: true });
   });
 }
 
 function handleSwipe(propertyIndex, startX, endX) {
-  const swipeThreshold = 50; // Minimum distance for swipe
+  const swipeThreshold = 40; // Minimum distance for swipe
   const diff = startX - endX;
   
   if (Math.abs(diff) > swipeThreshold) {
