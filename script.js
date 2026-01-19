@@ -102,10 +102,10 @@ const properties = [
       'img/ap6/ap6.jpeg',
       'img/ap6/ap7.jpeg'
     ],
-    title: "Duplex à venda",
-    location: "Guarulhos",
-    features: "?",
-    description: "Olá! Vi este Duplex no anúncio e gostaria de saber valor, entrada e financiamento. Duplex à venda em Guarulhos."
+    title: "Cobertura Duplex – SOLAR PASSIONE",
+    location: "Vila Nova Bonsucesso",
+    features: " 2 dormitórios • 2 vagas de garagem cobertas • 69m²"",
+    description: "Olá! Vi este Duplex no anúncio e gostaria de saber valor, entrada e financiamento. Cobertura Duplex – SOLAR PASSIONE."
   }
 ];
 
